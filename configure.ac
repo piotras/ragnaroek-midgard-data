@@ -4,6 +4,7 @@ dnl Process this file with autoconf to produce a configure script.
 dnl
 AC_INIT([midgard-data],[8.10.0])
 AC_PREREQ(2.50)
+AC_CONFIG_MACRO_DIR([m4])
 AC_CONFIG_HEADERS([config.h])
 
 dnl Automake is needed for the build system.
