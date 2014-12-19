@@ -1,0 +1,61 @@
+<?php
+
+/**
+ * \defgroup msg Midgard setup globals
+ * 
+ * Global constants defined for local midgard_setup.
+ */
+
+/**
+ * \ingroup msg
+ *
+ * Midgard routines
+ */
+define('MIDGARD_SETUP_MIDGARD_CONFIG_CMD',  "@MIDGARD_CONFIG@");
+define('MIDGARD_SETUP_MIDGARD_PREFIX',      "@MIDGARD_PREFIX@");
+define('MIDGARD_SETUP_DIRECTORY_ETC',       "@MGD_ETC_PATH@");
+define('MIDGARD_SETUP_DIRECTORY_USR',       "@MGD_USR_PATH@");
+define('MIDGARD_SETUP_DIRECTORY_VAR',       "@MGD_VAR_PATH@");
+
+/**
+ * \ingroup msg
+ *
+ * MySQL routines
+ */
+define('MIDGARD_SETUP_MYSQL_CMD',       "@MYSQL@");
+define('MIDGARD_SETUP_MYSQLADMIN_CMD',  "@MYSQLADMIN@");
+define('MIDGARD_SETUP_MYSQLDUMP_CMD',   "@MYSQLDUMP@");
+
+/**
+ * \ingroup msg
+ *
+ * Apache ( httpd ) routines
+ */
+define('MIDGARD_SETUP_APACHE_CMD',          "@APACHE@");
+define('MIDGARD_SETUP_APACHE_CONF',         "@APACHE_CONF@");
+define('MIDGARD_SETUP_APACHE_CONF_PATH',    "@APACHE_CONF_PATH@");    
+define('MIDGARD_SETUP_APACHE_LIBEXEC_PATH', "@APACHE_LIBEXEC_PATH@");
+define('MIDGARD_SETUP_APACHE_USER',         "@APACHE_USER@");
+define('MIDGARD_SETUP_APACHE_GROUP',        "@APACHE_GROUP@");
+
+/**
+ * \ingroup msg
+ *
+ * PHP routines
+ */
+define('MIDGARD_SETUP_PHP_CMD',     "@PHP_BINARY@");
+define('MIDGARD_SETUP_ROOT_DIR',    "@MGD_USR_PATH@/share/midgard/setup/php");
+
+/** 
+ * \ingroup msg 
+ * 
+ * Configuration data
+ */
+define('MIDGARD_SETUP_LOG_FILE',    "@MGD_VAR_PATH@/log/midgard/datagard.log");
+
+/* This can be optional */
+/* define('MIDGARD_SETUP_DIALOG_CMD',      "@DIALOG@"); */
+
+define('MIDGARD_SITEGROUP_0', 'SG0');
+
+?>

@@ -1,0 +1,7 @@
+Template: shared/midgard/use_datagard
+Type: note
+Description: Midgard-data package is configured with 'datagard' tool
+ Use /usr/sbin/datagard to create or update database, install PEAR 
+ packages or perform full Midgard upgrade.
+ You may also create Virtual Host for Apache using datagard.
+ .

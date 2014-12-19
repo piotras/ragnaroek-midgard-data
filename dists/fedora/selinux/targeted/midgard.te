@@ -1,0 +1,22 @@
+module midgard 1.1.0;
+
+require {
+	type httpd_t;
+	type system_dbusd_var_run_t;
+	type port_t;
+	type system_dbusd_t;
+	type http_cache_port_t;
+	class tcp_socket name_connect;
+	class dir search;
+	class sock_file write;
+	class unix_stream_socket connectto;
+	class dbus send_msg;
+}
+
+#============= httpd_t ==============
+allow httpd_t port_t:tcp_socket name_connect;
+allow httpd_t system_dbusd_var_run_t:dir search;
+allow httpd_t system_dbusd_var_run_t:sock_file write;
+allow httpd_t system_dbusd_t:unix_stream_socket connectto;
+allow httpd_t system_dbusd_t:dbus send_msg;
+allow httpd_t http_cache_port_t:tcp_socket name_connect;

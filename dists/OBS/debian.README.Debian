@@ -1,0 +1,8 @@
+This package is built for Apache2.
+If You need Apache1 support, you should edit 
+/usr/share/midgard/datagard/datagard.conf file.
+
+Run /sbin/datagard command to initialize or update database.
+This tool may be used also for creating Virtual Hosts config files.
+
+

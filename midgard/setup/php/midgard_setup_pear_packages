@@ -1,0 +1,20 @@
+# This is the list of initial midcom packages
+# If needed, add one package per line
+
+midcom
+midcom_helper_datamanager2 
+org_openpsa_httplib
+midcom_helper_imagepopup
+fi_protie_navigation
+midcom_helper_reflector
+no_bergfald_rcs
+de_linkm_sitemap
+net_nehmer_static
+net_nehmer_blog
+net_nemein_calendar
+org_routamc_photostream
+org_routamc_gallery
+midgard_admin_asgard
+midcom_admin_user
+midgard_admin_wizards
+net_nemein_redirector

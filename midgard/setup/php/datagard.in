@@ -1,0 +1,166 @@
+#! @PHP_BINARY@ 
+<?php
+
+if (ini_get ('safe_mode'))
+{
+    echo "\n";
+    echo "Can not run with safe_mode enabled. \n"; 
+    echo "Please disable it in configuration and run datagard again. \n\n";
+    exit; 
+}
+
+require_once '@MGD_USR_PATH@/share/midgard/setup/php/midgard_setup_globals.php';
+
+define('PHP_CMD',   '@PHP_BINARY@');
+define('_PHP_DG_CMD',  MIDGARD_SETUP_ROOT_DIR . "/midgard_datagard.php");
+
+/* We need to update pear itself and install Console_Getargs */
+require_once MIDGARD_SETUP_ROOT_DIR . "/midgard_setup_pear.php";
+$msp = new midgard_setup_pear();
+$msp->prepare_pear();
+
+require_once '@MGD_USR_PATH@/share/midgard/setup/php/midgard_setup_getargs.php';
+require_once MIDGARD_SETUP_ROOT_DIR . "/midgard_quick_setup.php";
+
+$msga = new midgard_setup_getargs();
+$argstr = $msga->get_argstr(true);
+$arg_action = $msga->get_setup_action();
+$arg_package = $msga->get_package();
+$arg_config = $msga->get_config_name();
+
+define('CMD', PHP_CMD . " " . _PHP_DG_CMD . $argstr);
+
+function datagard_exec($cmd)
+{
+    $output = array();
+    $retval = 0;
+
+    /* exec disables output :/ 
+    exec($cmd, &$output, &$retval);
+
+    if($retval != 0)
+    {
+        echo $output[1] . "\n";
+        return FALSE;
+    }
+    */
+
+    system($cmd, $retval);
+
+    if ($retval != 0)
+    {
+        echo "Failed to execute {$cmd}\n";
+    	return FALSE;
+    }
+
+    return TRUE;
+}
+
+function remove_midcom_caches()
+{
+    if ($midcom_caches = glob(MIDGARD_SETUP_DIRECTORY_VAR."/cache/midgard/midcom/*"))
+    {
+        foreach ($midcom_caches as $midcom_cache) system("rm -rf \"$midcom_cache\"");
+    }
+}
+
+if ($arg_action == 'install')
+{
+    /* If package is not a registered app take it as a component then to improve usability */
+    if (!empty($arg_package))
+    {
+        $config = new midgard_setup_config('cli', $arg_config);
+        $setup_app = new midgard_setup_app($config);
+        $app_names = $setup_app->get_app_names();
+
+        if (!in_array($arg_package, $app_names))
+            $arg_action = 'pear';
+    }
+}
+
+if ($arg_action == 'upgrade')
+{
+    $cmd = CMD . " -a dbupdate";
+    datagard_exec($cmd);
+}
+if ($arg_action == 'upgrade' || $arg_action == 'pear')
+{
+    $cmd = CMD . " -a pear";
+    datagard_exec($cmd);
+    $cmd = CMD . " -a dbupdate";
+    datagard_exec($cmd);
+    remove_midcom_caches();
+    midgard_setup_ui_cli::message(_("Now you should stop httpd server and start it again."));
+    exit;
+}
+elseif($arg_action != 'install')
+{
+    $cmd = CMD . " -a " . escapeshellarg($arg_action);
+    datagard_exec($cmd);
+    exit;
+}
+
+/* QUICK AND WIZARD INSTALL */
+
+/* Set more verbose log type */
+$cmd = CMD . " -a config-set -s loglevel message";
+if (!datagard_exec($cmd))
+{
+    exit;
+}
+
+/* Set logfile */
+$cmd = CMD . " -a config-set -s logfilename " . MIDGARD_SETUP_LOG_FILE;
+if (!datagard_exec($cmd))
+{
+    exit;
+}
+
+/* In case of application install, create database first */
+if (!empty($arg_package))
+{
+    $cmd = CMD . " -a dbinstall";
+    if (!datagard_exec($cmd))
+    {
+       	exit;
+    }
+}
+
+/* Create database and install pear packages (default Midgard CMS install) */
+/* or install application (application install) */
+$cmd = CMD . " -a install";
+if (!datagard_exec($cmd))
+{
+    exit;
+}
+
+/* "Restart" to update database and create tables for newly installed classes */
+$cmd = CMD . " -a dbupdate";
+if (!datagard_exec($cmd))
+{
+    exit;
+}
+
+remove_midcom_caches();
+
+/* "Restart" and create virtual host configuration */
+$cmd = CMD . " -a vhost";
+if (!datagard_exec($cmd))
+{
+    exit;
+}
+
+/* Set logfile and loglevel to initial state */
+$cmd = CMD . " -a config-set -s loglevel warning";
+if (!datagard_exec($cmd))
+{
+    exit;
+}
+
+$cmd = CMD . " -a config-set -s logfilename ''";
+if (!datagard_exec($cmd))
+{
+    exit;
+}
+
+?>

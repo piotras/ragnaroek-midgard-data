@@ -1,0 +1,5 @@
+/etc/midgard/apache(/.*)?	system_u:object_r:httpd_config_t:s0
+/var/cache/midgard(/.*)?	system_u:object_r:httpd_cache_t:s0
+/var/lib/midgard(/.*)?	system_u:object_r:httpd_sys_content_t:s0
+/var/log/midgard(/.*)?	system_u:object_r:httpd_log_t:s0
+/var/spool/midgard(/.*)?	system_u:object_r:httpd_var_run_t:s0

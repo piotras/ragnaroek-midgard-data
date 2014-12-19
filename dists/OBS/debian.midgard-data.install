@@ -1,0 +1,6 @@
+usr/sbin/datagard
+usr/share/midgard/setup/php/*.php
+usr/share/midgard/setup/php/*.inc
+usr/share/midgard/setup/php/midgard_setup_pear_packages
+usr/share/midgard/setup/php/midgard_setup_pear_templates
+usr/share/midgard/setup/xml/import/*.xml

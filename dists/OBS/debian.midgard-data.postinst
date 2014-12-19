@@ -1,0 +1,15 @@
+#! /bin/sh
+
+. /usr/share/debconf/confmodule
+
+if [ -f /usr/bin/datagard ];then
+  rm /usr/bin/datagard
+fi
+
+# Set memory_limit
+
+if [ -f /etc/php5/cli/php.ini ] ; then
+	
+	echo "Setting memory_limit = 48M in /etc/php5/cli/php.ini"
+	perl -i -pe 's/memory_limit.*/memory_limit = 48M/g' /etc/php5/cli/php.ini
+fi
