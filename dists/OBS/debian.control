@@ -2,7 +2,7 @@ Source: midgard-data
 Section: web
 Priority: optional
 Maintainer: Piotr Pokora <piotrek.pokora@gmail.com>
-Build-Depends: apache2-prefork-dev, libmysqlclient15-dev | libmysqlclient16 | libmysqlclient-dev, libmidgard8.9-dev, mysql-client 
+Build-Depends: apache2-prefork-dev | apache2-dev, libmysqlclient15-dev | libmysqlclient16 | libmysqlclient-dev, libmidgard8.9-dev, mysql-client 
 Standards-Version: 3.2.1
 
 Package: midgard-data
