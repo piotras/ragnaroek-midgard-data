@@ -94,7 +94,11 @@ configures it.
 %if 0%{?suse_version}
 %configure --with-apxs=%{_sbindir}/%{apxs} --with-php=/usr/bin/php5 --with-apache-user=wwwrun --with-apache-group=www
 %else
+%if 0%{?centos_version} == 700
+%configure --with-apxs=/usr/bin/%{apxs}
+%else
 %configure --with-apxs=%{_sbindir}/%{apxs}
+%endif
 %endif
 make %{?_smp_mflags}
 
