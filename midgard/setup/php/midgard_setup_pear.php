@@ -269,6 +269,7 @@ class midgard_setup_pear
             midgard_setup_ui_cli::warning(_("Failed to set '{$mgdschema_dir}' mgdschema_dir"));
         }
 
+        /* Do not install sql role
         $this->install_midcom_package('Role_Midgardsql', true);
         midgard_setup_pear::reload_roles($this->pear_config);
 
@@ -279,6 +280,7 @@ class midgard_setup_pear
         {
             midgard_setup_ui_cli::warning(_("Failed to set '{$midgardsql_dir}' midgardsql_dir"));
         }
+         */
 
         $this->install_midcom_package('Role_Midgardelement', true);
         midgard_setup_pear::reload_roles($this->pear_config);
