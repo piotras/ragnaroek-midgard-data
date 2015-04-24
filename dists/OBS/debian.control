@@ -27,7 +27,7 @@ Description: Midgard Content Management System
 Package: midgard
 Section: web
 Architecture: all
-Depends: midgard-data (>= ${source:Version}), libapache2-mod-midgard (>=8.10.0), mysql-server-5.0  | mysql-server-5.1, php5-midgard, php5-memcache, solr-common | solr-tomcat5.5, php5-xcache
+Depends: midgard-data (>= ${source:Version}), libapache2-mod-midgard (>=8.10.0), mysql-server-5.0  | mysql-server-5.1 | mysql-server, php5-midgard, php5-memcache, solr-common | solr-tomcat5.5, php5-xcache
 Replaces:
 Description: Midgard Content Management System
  There are several package that, together, provide the Midgard Content
@@ -38,7 +38,7 @@ Description: Midgard Content Management System
 Package: midgard-debian
 Section: web
 Architecture: all
-Depends: midgard-data (>= ${source:Version}), libapache2-mod-midgard (>=8.10.0), mysql-server-5.0 | mysql-server-5.1, php5-midgard, php5-memcache
+Depends: midgard-data (>= ${source:Version}), libapache2-mod-midgard (>=8.10.0), mysql-server-5.0 | mysql-server-5.1 | mysql-server, php5-midgard, php5-memcache
 Replaces:
 Description: Midgard Content Management System
  This is Midgard Framework meta package optimized for debian. 
