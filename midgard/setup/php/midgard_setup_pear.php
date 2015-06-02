@@ -56,8 +56,8 @@ class midgard_setup_pear
         midgard_setup_log::write(_("Initialize new ").__CLASS__);
 
         $this->midcom_channel = "ragnaroek.pear.midgard-project.org";
-        $this->midcom_channel_alias = "ragnaroek";
-        $this->midcom_channel_base = 'http://ragnaroek.pear.midgard-project.org/Chiara_PEAR_Server_REST';
+        $this->midcom_channel_alias = "ragnaroek"; 
+        $this->midcom_channel_base = 'http://ragnaroek.pear.midgard-project.org/rest';
 
         $this->htmlpurifier_channel = "htmlpurifier.org";	
         $this->firephp_channel = "pear.firephp.org";
@@ -549,7 +549,7 @@ class midgard_setup_pear
 
             if (PEAR::isError($installed))
             {
-                midgard_setup_ui_cli::error("PEAR Installer: package '{$name}' " . $installed->getMessage());
+                midgard_setup_ui_cli::error("PEAR Installer: newer package '{$name}' " . $installed->getMessage());
             }
 
             midgard_setup_ui_cli::message(_("successfully installed"), true);
@@ -596,7 +596,7 @@ class midgard_setup_pear
         */
 
         if (version_compare($installed_version, $url['version'], '>=')) 
-        { 
+        {
             return false;
         }
 
@@ -638,6 +638,7 @@ class midgard_setup_pear
         }
 
         /* discover firephp */
+        /*
         if (!$this->pear_registry->channelExists($this->firephp_channel))
         {
             $ret = $this->pear_channel->doDiscover('channel-add', array(), array($this->firephp_channel));
@@ -647,6 +648,7 @@ class midgard_setup_pear
                 midgard_setup_ui_cli::error($ret->getMessage());
             }
         }
+         */
 
         $this->update_channels();
     }
@@ -670,11 +672,13 @@ class midgard_setup_pear
         }
 
         /* update firephp */
+        /*
         $ret = $this->pear_channel->doUpdate('channel-update', array(), array($this->firephp_channel));
         if (PEAR::isError($ret))
         {
             midgard_setup_ui_cli::error($ret->getMessage());
         }
+         */
     }
 
     private function clean_old_midcom()
