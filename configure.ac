@@ -100,6 +100,14 @@ AC_ARG_WITH([apxs],
 test -x "$APXS" || AC_MSG_ERROR([apxs not found, use --with-apxs])
 AC_SUBST([APXS])
 
+dnl Check if envvars file exists
+dnl If yes, enable variables
+if test -f "/etc/apache2/envvars"; then
+	APACHE_ENV='source /etc/apache2/envvars '
+else
+	APACHE_ENV=``
+fi
+$APACHE_ENV
 dnl Check for Apache settings
 AC_MSG_CHECKING([for the Apache executable])
 APACHE=`$APXS -q SBINDIR`/`$APXS -q TARGET`
