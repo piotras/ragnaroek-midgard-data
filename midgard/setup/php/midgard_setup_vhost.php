@@ -202,9 +202,11 @@ class midgard_setup_vhost
             /* Check if apache is listening already on this port */
             if(!$this->apache_is_listening($port))
             {
+                /*
                 $content .= "Listen {$port} \n";
                 $content .= "NameVirtualHost *:{$port}\n";
                 $content .= "\n";
+                 */
             }
             
             $content .= "Include {$conf_dir}/vhosts/[^\.#]*\n";
@@ -301,8 +303,8 @@ class midgard_setup_vhost
 
         /* Add directories */
         $cnf->add_directory($this->host_dir, 
-            array("Options +SymLinksIfOwnerMatch", "Allow from all"));
-        $cnf->add_directory($this->cache_dir, array("Allow from all"));
+            array("Options +SymLinksIfOwnerMatch", "Allow from all", "Require all granted"));
+        $cnf->add_directory($this->cache_dir, array("Allow from all", "Require all granted"));
 
         $midcom_static_dir = $this->host_dir."/midcom-static";
         $cnf->add_directory($midcom_static_dir, 
